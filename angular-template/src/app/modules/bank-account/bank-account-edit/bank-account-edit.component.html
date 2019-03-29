@@ -1,0 +1,52 @@
+<div class="dialog" fxLayout="column" fxLayoutAlign="center start">
+
+  <h1 mat-dialog-title>{{data.title}}</h1>
+
+  <mat-dialog-content class="full-width">
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.customerName" placeholder="Customer Name">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.accountName" placeholder="Account Name">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.bankName" placeholder="Bank Name">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.bankBranch" placeholder="Bank Branch">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.accountNumber" placeholder="Account Number">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.ibanNumber" placeholder="Iban Number">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Account Type" [(ngModel)]="data.value.type">
+        <mat-option *ngFor="let type of types"
+          [value]="data.type?.Key === type.Key ? data.value.type : type">
+          {{type.Value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-radio-group [(ngModel)]="data.value.status" fxLayoutGap="20px">
+      <mat-radio-button *ngFor="let status of statuses"
+        [value]="data.status?.Key === status.Key ? data.value.status : status">{{status.Value}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-checkbox [(ngModel)]="data.value.primary" [value]="data.value.primary === true ? data.value.primary : false" float-right class="primary-checkbox">Primary Account</mat-checkbox>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="full-width" dir="rtl" fxLayoutGap="20px">
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.value" cdkFocusInitial>Save</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

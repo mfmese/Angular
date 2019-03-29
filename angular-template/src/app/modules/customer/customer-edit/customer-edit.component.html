@@ -1,0 +1,168 @@
+<div class="login-page center-screen">
+  <mat-card class="login-card">
+    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+      <h4 class="title">Customer Edit</h4>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <form class="form" [formGroup]="form">
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Name" formControlName="name">
+            <mat-error>
+              <customer-edit-validation [control]="form.controls.name"></customer-edit-validation>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Surname" formControlName="surname">
+            <mat-error>
+              <app-validation [control]="form.controls.surname"></app-validation>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput [matDatepicker]="birtDatePicker" placeholder="Birth Date">
+            <mat-datepicker-toggle matSuffix [for]="birtDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #birtDatePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput type="number" maxlength="11" placeholder="Identity" formControlName="identity">
+            <mat-error>
+              <app-validation [control]="form.controls.identity"></app-validation>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Salary" formControlName="salary">
+            <mat-error>
+              <app-validation [control]="form.controls.salary"></app-validation>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Tax No" formControlName="taxno">
+            <mat-error>
+              <app-validation [control]="form.controls.taxno"></app-validation>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Tax Branch" formControlName="taxbranch">
+            <mat-error>
+              <app-validation [control]="form.controls.taxbranch"></app-validation>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Insurance No" formControlName="insuranceno">
+            <mat-error>
+              <app-validation [control]="form.controls.insuranceno"></app-validation>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Extra Payment" formControlName="extrapayment">
+            <mat-error>
+              <app-validation [control]="form.controls.extrapayment"></app-validation>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Profit Margin" formControlName="profitmargin">
+            <mat-error>
+              <app-validation [control]="form.controls.profitmargin"></app-validation>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+          <mat-form-field class="full-width" fxFlex>
+            <input type="text" placeholder="Title" aria-label="Title" matInput [formControl]="titleControl"
+              [matAutocomplete]="autoTitle">
+            <mat-autocomplete #autoTitle="matAutocomplete">
+              <mat-option *ngFor="let title of titleFiltered | async" [value]="title.Value">
+                {{title.Value}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <mat-label>Performance</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let performance of performances" [value]="performance">
+                {{performance.Value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Phone" disabled [value]="primaryPhoneNumber">
+            <mat-icon matSuffix class="click-hand" (click)="openPhoneNumberDialog()">edit</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Email" disabled [value]="primaryEmail">
+            <mat-icon matSuffix class="click-hand" (click)="openEmailDialog()">edit</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Bank Account"
+              [value]="primaryBankAccount===undefined ? '' :primaryBankAccount.accountName">
+            <mat-icon matSuffix class="click-hand" (click)="openBankAccountDialog()">edit</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput placeholder="Address"
+              [value]="primaryAddress===undefined ? '' :primaryAddress.country + ' ' + primaryAddress.city">
+            <mat-icon matSuffix class="click-hand" (click)="openAddressDialog()">edit</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput [matDatepicker]="entryDatePicker" placeholder="Entry Date">
+            <mat-datepicker-toggle matSuffix [for]="entryDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #entryDatePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex>
+            <input matInput [matDatepicker]="updatedDatePicker" placeholder="Updated Date" disabled>
+            <mat-datepicker-toggle matSuffix [for]="updatedDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #updatedDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width" fxFlex>
+            <mat-label>Comment</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="5"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" dir="rtl">
+          <button mat-raised-button color="primary">Save</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

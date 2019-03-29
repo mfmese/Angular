@@ -1,0 +1,76 @@
+<div class="dialog" fxLayout="column" fxLayoutAlign="center start">
+
+  <h1 mat-dialog-title>{{data.title}}</h1>
+
+  <mat-dialog-content class="full-width" fxLayout="column">
+
+
+    <mat-form-field class="full-width" fxFlex>
+      <input type="text" [(ngModel)]="data.value.country" placeholder="Country" aria-label="Country" matInput
+        [formControl]="countryControl" [matAutocomplete]="autoCountry">
+      <mat-autocomplete #autoCountry="matAutocomplete">
+        <mat-option *ngFor="let country of countryFiltered | async" [value]="country.Value">
+          {{country.Value}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" fxFlex>
+      <input type="text" [(ngModel)]="data.value.state" placeholder="State" aria-label="State" matInput
+        [formControl]="stateControl" [matAutocomplete]="autoState">
+      <mat-autocomplete #autoState="matAutocomplete">
+        <mat-option *ngFor="let state of stateFiltered | async" [value]="state.Value">
+          {{state.Value}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" fxFlex>
+      <input type="text" [(ngModel)]="data.value.city" placeholder="City" aria-label="City" matInput
+        [formControl]="cityControl" [matAutocomplete]="autoCity">
+      <mat-autocomplete #autoCity="matAutocomplete">
+        <mat-option *ngFor="let city of cityFiltered | async" [value]="city.Value">
+          {{city.Value}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" fxFlex>
+      <input type="text" [(ngModel)]="data.value.district" placeholder="District" aria-label="District" matInput
+        [formControl]="districtControl" [matAutocomplete]="autoDistrict">
+      <mat-autocomplete #autoDistrict="matAutocomplete">
+        <mat-option *ngFor="let district of districtFiltered | async" [value]="district.Value">
+          {{district.Value}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="data.value.address" placeholder="Address">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" fxFlex>
+      <mat-select placeholder="Address Type" [(ngModel)]="data.value.type">
+        <mat-option *ngFor="let type of types" [value]="data.type?.Key === type.Key ? data.value.type : type">
+          {{type.Value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-radio-group [(ngModel)]="data.value.status" fxLayoutGap="20px" fxFlex>
+        <mat-radio-button *ngFor="let status of statuses"
+          [value]="data.status?.Key === status.Key ? data.value.status : status">{{status.Value}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <mat-checkbox [(ngModel)]="data.value.primary" [value]="data.value.primary === true ? data.value.primary : false"
+        float-right class="primary-checkbox">Primary Address</mat-checkbox>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="full-width" dir="rtl" fxLayoutGap="20px">
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.value" cdkFocusInitial>Save</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

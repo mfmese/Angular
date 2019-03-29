@@ -1,0 +1,26 @@
+<!-- <button mat-mini-fab mat-button [mat-dialog-close]="data" style="float:right;" cdkFocusInitial>x</button> -->
+<div class="dialog" fxLayout="column" fxLayoutAlign="center start">
+
+  <h1 mat-dialog-title>{{dataTemp.title}}</h1>
+
+  <mat-dialog-content class="full-width">
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="dataTemp.newValue" placeholder="{{dataTemp.placeHolder}}" autofocus>
+      <mat-icon matSuffix class="click-hand" (click)="add(data.newValue)">add_circle</mat-icon>
+    </mat-form-field>
+
+    <p>Select primary {{dataTemp.placeHolder}}</p>
+    <mat-radio-group class="full-width" [(ngModel)]="dataTemp.primaryValue" fxLayout="column">
+      <mat-radio-button *ngFor="let value of dataTemp.values" [value]="value" fxFlex class="full-width">
+        {{value}}
+        <mat-icon matSuffix class="click-hand delete-icon" (click)="remove(value)">delete</mat-icon>
+      </mat-radio-button>
+
+    </mat-radio-group>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="full-width" dir="rtl" fxLayoutGap="20px">
+    <button mat-raised-button color="primary" [mat-dialog-close]="save()" cdkFocusInitial>Save</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,65 @@
+.center-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}   
+
+.full-width {
+    width: 100%;
+}
+.click-hand {
+    cursor: pointer;
+}
+
+.mat-table {
+    overflow: auto;
+}
+
+.mat-radio-label-content{
+    width: 100%;
+}
+
+.mat-radio-label{
+    width: 100%;
+}
+
+.mat-cell, .mat-header-cell {
+overflow: hidden;
+word-wrap: break-word;
+max-width: 90px;
+padding-left: 5px !important;
+padding-right: 5px !important;
+}
+
+.mat-column-actions, .mat-column-Actions{
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-elevation-z8{
+padding-left: 7px !important;
+padding-right: 7px !important;
+}
+  
+.mat-radio-button, .mat-select, .mat-checkbox{
+    margin-top: 15px;
+}
+
+.actions, .Actions{
+    margin-left: -20px;
+    margin-top: 10px;
+}
+
+.mat-select {
+    margin-top:-10px;
+}
