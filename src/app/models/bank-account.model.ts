@@ -1,4 +1,3 @@
-import { KeyValue } from "src/app/core/models/key-value";
 import { BaseModel } from "./base.model";
 
 export class BankAccount extends BaseModel{

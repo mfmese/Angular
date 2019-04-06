@@ -8,7 +8,7 @@ import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
   imports: [
     CoreModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [AddressModule.components],
   entryComponents: [AddressModule.components]

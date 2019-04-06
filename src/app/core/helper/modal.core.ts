@@ -1,6 +1,6 @@
 import { MatDialog } from "@angular/material/dialog";
 import { map } from "rxjs/internal/operators/map";
-import { ModalPopupType } from "../models/modal-popup-type";
+import { ModalPopupType } from "../../models/modal-popup-type";
 
 export class ModalCore{    
     static open(dialog: MatDialog, ModalComponent, data = {}, width:string = ModalPopupType.Default) {

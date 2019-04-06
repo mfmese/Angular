@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { BankAccount } from '../../models/bank-account.model';
+import { BankAccount } from '../../../models/bank-account.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BankAccountEditComponent } from '../bank-account-edit/bank-account-edit.component';
-import { ModalPopupBase } from '../../models/modal-popup-base.model';
+import { ModalPopupBase } from '../../../models/modal-popup-base.model';
 
 @Component({
   selector: 'bank-account-list',

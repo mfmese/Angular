@@ -4,15 +4,15 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CustomerEditValidation } from '../customer-validation/customer-edit.validation';
 import { FormControl, FormBuilder } from '@angular/forms';
-import { BankAccount } from '../../models/bank-account.model';
+import { BankAccount } from '../../../models/bank-account.model';
 import { BankAccountListComponent } from '../../bank-account/bank-account-list/bank-account-list.component';
 import { ModalCore } from 'src/app/core/helper/modal.core';
-import { ModalPopup } from '../../models/modal-popup.model';
+import { ModalPopup } from '../../../models/modal-popup.model';
 import { ModalPopupComponent } from '../../shared/modal-popup/modal-popup.component';
-import { ModalPopupType } from 'src/app/core/models/modal-popup-type';
-import { Address } from '../../models/address.model';
+import { Address } from '../../../models/address.model';
 import { AddressListComponent } from '../../address/address-list/address-list.component';
-import { KeyValue } from 'src/app/core/models/key-value';
+import { KeyValue } from 'src/app/models/key-value';
+import { ModalPopupType } from 'src/app/models/modal-popup-type';
 
 @Component({
   selector: 'customer-edit',

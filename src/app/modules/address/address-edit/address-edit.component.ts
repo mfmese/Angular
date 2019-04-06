@@ -1,9 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { KeyValue } from 'src/app/core/models/key-value';
+import { KeyValue } from 'src/app/models/key-value';
+import { Store, select } from '@ngrx/store';
+import { RootStoreState, AddressStoreSelectors, AddressStoreActions } from 'src/app/store';
+import { IDValue } from 'src/app/models/id-value';
 
 @Component({
   selector: 'address-edit',
@@ -12,47 +15,28 @@ import { KeyValue } from 'src/app/core/models/key-value';
 })
 export class AddressEditComponent implements OnInit {
 
-  countryControl = new FormControl();
-  countryFiltered: Observable<KeyValue[]>;  
-  countries: KeyValue[] =  [
-    {Key:'1', Value:'Turkey'}, 
-    {Key:'2', Value:'USA'}
-  ];  
+  countries$: Observable<IDValue[]>;
+  states$: Observable<IDValue[]>;
+  cities$: Observable<IDValue[]>;
+  districties$: Observable<IDValue[]>;
 
-  stateControl = new FormControl();
-  stateFiltered: Observable<KeyValue[]>;  
-  states: KeyValue[] =  [
-    {Key:'1', Value:'Ege'}, 
-    {Key:'2', Value:'Marmara'}
-  ]; 
-
-  cityControl = new FormControl();
-  cityFiltered: Observable<KeyValue[]>;  
-  cities: KeyValue[] =  [
-    {Key:'1', Value:'Istanbul'}, 
-    {Key:'2', Value:'Ankara'}
-  ]; 
-
-  districtControl = new FormControl();
-  districtFiltered: Observable<KeyValue[]>;  
-  districties: KeyValue[] =  [
-    {Key:'1', Value:'Çekmeköy'}, 
-    {Key:'2', Value:'Kadıköy'}
-  ]; 
+  error$: Observable<any>;
+  isLoading$: Observable<boolean>;
 
   address: string;
   types = [];
   statuses: KeyValue[] = [];
 
-  constructor(public dialogRef: MatDialogRef<AddressEditComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(private store$: Store<RootStoreState.State>, public dialogRef: MatDialogRef<AddressEditComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
 
   ngOnInit() {
-    // this.form = new CustomerEditValidation(this.formBuilder).validators;
+    this.countries$ = this.store$.pipe(select(AddressStoreSelectors.selectAllCountryItems));
+    this.states$ = this.store$.pipe(select(AddressStoreSelectors.selectAllStateItems));
+    // this.cities$ = this.store$.pipe(select(AddressStoreSelectors.selectAllCityItems));
+    // this.districties$ = this.store$.pipe(select(AddressStoreSelectors.selectAllDistrictItems));
 
-    this.countryFiltered = this._filtered(this.countryControl,this.countries);
-    this.stateFiltered = this._filtered(this.stateControl,this.states);
-    this.cityFiltered = this._filtered(this.cityControl,this.cities);
-    this.districtFiltered = this._filtered(this.districtControl,this.districties);
+    this.error$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryError));
+    this.isLoading$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryIsLoading));
 
     this.types = [
       {
@@ -81,20 +65,18 @@ export class AddressEditComponent implements OnInit {
     ]
   }
 
+  onRefresh() {
+    this.store$.dispatch(
+      new AddressStoreActions.LoadRequestAction()
+    );
+  }
+
   cancel(): void {
     this.dialogRef.close();
   }
 
-  private _filtered(control: FormControl, list: KeyValue[]): Observable<KeyValue[]>{
-    return control.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => value ? this._filter(value, list) : list.slice())
-      );
-  }
-
-  private _filter(value: string, list: KeyValue[]): KeyValue[] {
+  private filter(value: string = "", list: IDValue[]): Observable<IDValue[]> {
     const filterValue = value.toLowerCase();
-    return list.filter(option => option.Value.toLowerCase().indexOf(filterValue) === 0);
+    return of(list.filter(option => option.Value.toLowerCase().indexOf(filterValue) === 0));
   }
 }

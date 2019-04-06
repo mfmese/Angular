@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { KeyValue } from 'src/app/core/models/key-value';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { KeyValue } from 'src/app/models/key-value';
 
 @Component({
   selector: 'app-bank-account-edit',

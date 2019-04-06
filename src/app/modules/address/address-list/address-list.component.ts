@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { Address } from '../../models/address.model';
+import { Address } from '../../../models/address.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddressEditComponent } from '../address-edit/address-edit.component';
-import { ModalPopupBase } from '../../models/modal-popup-base.model';
+import { ModalPopupBase } from '../../../models/modal-popup-base.model';
 
 @Component({
   selector: 'address-list',

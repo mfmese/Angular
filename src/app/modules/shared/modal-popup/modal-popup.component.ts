@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { ModalData } from 'src/app/core/models/modal-data.model';
+import { ModalData } from 'src/app/models/modal-data.model';
 
 @Component({
   selector: 'modal-popup',

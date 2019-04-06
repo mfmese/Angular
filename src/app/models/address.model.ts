@@ -1,5 +1,5 @@
-import { KeyValue } from "src/app/core/models/key-value";
 import { BaseModel } from "./base.model";
+import { KeyValue } from "./key-value";
 
 export class Address extends BaseModel{
     id: number;

@@ -1,4 +1,4 @@
-import { KeyValue } from "src/app/core/models/key-value";
+import { KeyValue } from "./key-value";
 
 export class BaseModel{
     type: KeyValue;
