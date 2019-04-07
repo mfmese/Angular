@@ -6,12 +6,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AddressStoreModule } from './address-store';
 import { environment } from 'src/environments/environment';
+import { addressReducer } from './address/reducer';
 
 @NgModule({
   imports: [
     CommonModule,
-    AddressStoreModule,
-    StoreModule.forRoot({}),
+    // AddressStoreModule,
+    StoreModule.forRoot({address: addressReducer}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

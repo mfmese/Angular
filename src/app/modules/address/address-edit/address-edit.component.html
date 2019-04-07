@@ -9,7 +9,7 @@
       <input type="text" [(ngModel)]="data.value.country" placeholder="Country" aria-label="Country" matInput
         [matAutocomplete]="autoCountry">
       <mat-autocomplete #autoCountry="matAutocomplete">
-        <mat-option *ngFor="let country of filter(this.data.value.country, countries$ | async) | async"
+        <mat-option *ngFor="let country of filter(this.data.value.country, (address$ | async).countries) | async"
           [value]="country.Value">
           {{country.Value}}
         </mat-option>
@@ -20,17 +20,17 @@
       <input type="text" [(ngModel)]="data.value.state" placeholder="State" aria-label="State" matInput
          [matAutocomplete]="autoState">
       <mat-autocomplete #autoState="matAutocomplete">
-        <mat-option *ngFor="let state of filter(this.data.value.state, states$ | async) | async" [value]="state.Value">
+        <mat-option *ngFor="let state of filter(this.data.value.state, (address$ | async).states) | async" [value]="state.Value">
           {{state.Value}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
-    <!-- <mat-form-field class="full-width" fxFlex>
+    <mat-form-field class="full-width" fxFlex>
       <input type="text" [(ngModel)]="data.value.city" placeholder="City" aria-label="City" matInput
-        [formControl]="cityControl" [matAutocomplete]="autoCity">
+         [matAutocomplete]="autoCity">
       <mat-autocomplete #autoCity="matAutocomplete">
-        <mat-option *ngFor="let city of filter(this.data.value.city, cities$ | async) | async" [value]="city.Value">
+        <mat-option *ngFor="let city of filter(this.data.value.city, (address$ | async).cities) | async" [value]="city.Value">
           {{city.Value}}
         </mat-option>
       </mat-autocomplete>
@@ -38,13 +38,13 @@
 
     <mat-form-field class="full-width" fxFlex>
       <input type="text" [(ngModel)]="data.value.district" placeholder="District" aria-label="District" matInput
-        [formControl]="districtControl" [matAutocomplete]="autoDistrict">
+         [matAutocomplete]="autoDistrict">
       <mat-autocomplete #autoDistrict="matAutocomplete">
-        <mat-option *ngFor="let district of filter(this.data.value.district, districties$ | async) | async" [value]="district.Value">
+        <mat-option *ngFor="let district of filter(this.data.value.district, (address$ | async).districties) | async" [value]="district.Value">
           {{district.Value}}
         </mat-option>
       </mat-autocomplete>
-    </mat-form-field> -->
+    </mat-form-field>
 
     <mat-form-field class="full-width">
       <input matInput [(ngModel)]="data.value.address" placeholder="Address">

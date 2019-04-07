@@ -8,9 +8,9 @@ import { featureReducer } from './reducer';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('Address', featureReducer),
-    EffectsModule.forFeature([AddressStoreEffects])
+    // StoreModule.forFeature('Address', featureReducer),
+    // EffectsModule.forFeature([AddressStoreEffects])
   ],
-  providers: [AddressStoreEffects]
+  // providers: [AddressStoreEffects]
 })
 export class AddressStoreModule {}

@@ -7,6 +7,7 @@ import { KeyValue } from 'src/app/models/key-value';
 import { Store, select } from '@ngrx/store';
 import { RootStoreState, AddressStoreSelectors, AddressStoreActions } from 'src/app/store';
 import { IDValue } from 'src/app/models/id-value';
+import * as fromAddress from './../../../store/address/reducer';
 
 @Component({
   selector: 'address-edit',
@@ -15,10 +16,7 @@ import { IDValue } from 'src/app/models/id-value';
 })
 export class AddressEditComponent implements OnInit {
 
-  countries$: Observable<IDValue[]>;
-  states$: Observable<IDValue[]>;
-  cities$: Observable<IDValue[]>;
-  districties$: Observable<IDValue[]>;
+  address$: Observable<IDValue[]>;
 
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
@@ -27,16 +25,13 @@ export class AddressEditComponent implements OnInit {
   types = [];
   statuses: KeyValue[] = [];
 
-  constructor(private store$: Store<RootStoreState.State>, public dialogRef: MatDialogRef<AddressEditComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(private store$: Store<fromAddress.State>, public dialogRef: MatDialogRef<AddressEditComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
 
   ngOnInit() {
-    this.countries$ = this.store$.pipe(select(AddressStoreSelectors.selectAllCountryItems));
-    this.states$ = this.store$.pipe(select(AddressStoreSelectors.selectAllStateItems));
-    // this.cities$ = this.store$.pipe(select(AddressStoreSelectors.selectAllCityItems));
-    // this.districties$ = this.store$.pipe(select(AddressStoreSelectors.selectAllDistrictItems));
+    this.address$ = this.store$.pipe(select('address'));
 
-    this.error$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryError));
-    this.isLoading$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryIsLoading));
+    // this.error$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryError));
+    // this.isLoading$ = this.store$.pipe(select(AddressStoreSelectors.selectCountryIsLoading));
 
     this.types = [
       {
